@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>FLAT</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <base href="/"> -->
+
+    <!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="FLAT.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="app.css">
+
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110862391-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110862391-3');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="app.js"></script>
+</head>
+
+<body>
+<div class="container" id="main">
+    <div class="row">
+        <h1 class="col-md-12 text-center">
+            Fooling LiDAR Perception via Adversarial Trajectory Perturbation </br>
+<!--            <small>-->
+<!--                ICLR 2021-->
+<!--            </small>-->
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <ul class="list-inline">
+                <li>
+                    <a href="https://scholar.google.com/citations?user=i_aajNoAAAAJ&hl=en">
+                        Yiming Li
+                    </a><sup>1</sup>
+                </li>
+                <li>
+                    <a href="https://scholar.google.com/citations?hl=en&user=OTBgvCYAAAAJ">
+                        Congcong Wen
+                    </a><sup>1, 2</sup>
+                </li>
+                <li>
+                    <a href="https://scholar.google.com/citations?user=dgN8vtwAAAAJ&hl=en">
+                        Felix Juefei-Xu
+                    </a><sup>3</sup>
+                </li>
+                <li>
+                    <a href="https://scholar.google.com/citations?user=YeG8ZM0AAAAJ&hl=en">
+                        Chen Feng
+                    </a><sup>1</sup>
+                </li>
+            </ul>
+            <sup>1</sup>New York University, <sup>2</sup>University of Chinese Academy of Sciences, <sup>3</sup>Alibaba Group
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-2 col-sm-offset-3 text-center">
+            <a href="https://ai4ce.github.io">
+                <image src="ai4ce.jpg" height="50px"></image>
+                <br>
+                <h4><strong>Lab</strong></h4>
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-2 text-center">
+            <a href="https://arxiv.org/abs/2103.15326.pdf">
+                <image src="paper.png" height="50px"></image>
+                <br>
+                <h4><strong>Paper</strong></h4>
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-2 text-center">
+            <a href="https://github.com/ai4ce/FLAG">
+                <image src="github.png" height="50px"></image>
+                <br>
+                <h4><strong>Experiments</strong></h4>
+            </a>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Abstract
+            </h3>
+            LiDAR point clouds collected from a moving vehicle are functions of its trajectories, because the sensor motion needs to be compensated to avoid distortions. When autonomous vehicles are sending LiDAR point clouds to deep networks for perception and planning, could the motion compensation consequently become a wide-open backdoor in those networks, due to both the adversarial vulnerability of deep learning and GPS-based vehicle trajectory estimation that is susceptible to wireless spoofing? We demonstrate such possibilities for the first time: instead of directly attacking point cloud coordinates which requires tampering with the raw LiDAR readings, only adversarial spoofing of a self-driving car's trajectory with small perturbations is enough to make safety-critical objects undetectable or detected with incorrect positions. Moreover, polynomial trajectory perturbation is developed to achieve a temporally-smooth and highly-imperceptible attack. Extensive experiments on 3D object detection have shown that such attacks not only lower the performance of the state-of-the-art detectors effectively, but also transfer to other detectors, raising a red flag for the community.
+            <br>
+            <br>
+            <br>
+            <br>
+            <image src="FLAT.png" width="100%" class="center"></image>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Motion Distortion in LiDAR
+            </h3>
+            LiDAR measurements are obtained along with the rotation of its beams, so the measurements in a full sweep are captured at different timestamps, introducing motion distortion which jeopardizes the vehicle perception. Autonomous systems generally utilize LiDAR's location and orientation obtained from the localization system to correct distortion. Most LiDAR-based datasets [2, 7] have finished synchronization before release. Hence, the performance of current 3D perception algorithms in the distorted point cloud remains unexplored. In this work, we recover the point cloud before motion correction through linear pose interpolatation and rigid body transformation.
+            <br>
+            <br>
+            <image src="Distortion.png" width="100%" class="center"></image>
+<!--            <video width="100%" autoplay loop controls muted>-->
+<!--                <source src="off_the_shelf.mp4" type="video/mp4"/>-->
+<!--            </video>-->
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                White Box Attack
+            </h3>
+            Our white box model, PointRCNN [31], uses PointNet++ [27] as its backbone and includes two stages: stage-1 for proposal generation based on each foreground point, and stage-2 for proposal refinement in the canonical coordinate. Since PointRCNN uses raw point cloud as the input, the gradient can smoothly reach the point cloud, then arrive at vehicle trajectory. In this work, we individually attack the classification as well as regression branches in stage-1 and stage-2, with four attack targets in total.
+            <br>
+            <image src="white1.png" width="100%" class="center"></image>
+            <image src="white2.png" width="100%" class="center"></image>
+            <image src="white3.png" width="100%" class="center"></image>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Black Box Attack
+            </h3>
+            PointPillar [14] proposes a fast point cloud encoder using pseudo-image representation. It divides point cloud into bins and uses PointNet [26] to extract the feature for each pillar. Due to the non-differentiable preprocesssing stage, the gradient cannot reach the point cloud. Peiyun et al. [11] proposed to augment PointPillar with the visibility map, achieving better precision. In this work, we use PointPillar++ to denote PointPillar with visibility map in [11]. We use perturbation learned from the white box PointRCNN to attack black box PointPillar++, in order to examine the transferability of our attack pipeline.
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-3 col-md-offset-1 text-center">
+            <image src="original/0097.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="original/0556.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="original/0909.gif" height="350px"></image>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <strong>a) Original Detections. Green/red boxes denote groundtruth/predictions respectively.</strong>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-3 col-md-offset-1 text-center">
+            <image src="distortion/0097.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="distortion/0556.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="distortion/0909.gif" height="350px"></image>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <strong>b) Detections after attack. Green/red boxes denote groundtruth/predictions respectively..</strong>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-3 col-md-offset-1 text-center">
+            <image src="original/1070.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="original/0796.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="original/0558.gif" height="350px"></image>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <strong>a) Original Detections. Green/red boxes denote groundtruth/predictions respectively.</strong>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-3 col-md-offset-1 text-center">
+            <image src="distortion/1070.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="distortion/0796.gif" height="350px"></image>
+        </div>
+        <div class="col-xs-4 col-sm-3 text-center">
+            <image src="distortion/0558.gif" height="350px"></image>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <strong>b) Detections after attack. Green/red boxes denote groundtruth/predictions respectively..</strong>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+        <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Polynomial Trajectory Perturbation
+            </h3>
+            To achieve a temporally-smooth attack which is less perceptible, we implement a polynomial regression before the generation of perturbation and attack the polynomial coefficients instead of the trajectory itself. In this scenario, we only need to manipulate several key points to bend a polynomial-parameterized trajectory which can be easily achieved in reality, realizing a real-time and high-quality attack. Several qualitative examples of the polynomial trajectory perturbation are shown below.
+            <br>
+            <br>
+            <image src="trajectory.png" width="100%" class="center"></image>
+        </div>
+
+        <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Acknowledgement
+            </h3>
+            The research is supported by NSF FW-HTF program under DUE-2026479. The authors gratefully acknowledge the useful comments and suggestions from <a href="https://scholar.google.com/citations?user=hOwPFewAAAAJ&hl=en">Yong Xiao</a>, <a href="https://scholar.google.com/citations?hl=en&user=hn0u5VgAAAAJ">Wenxiao Wang</a>, <a href="https://scholar.google.com/citations?hl=en&user=VoF-UAEAAAAJ">Chenzhuang Du</a>, <a href="https://scholar.google.com/citations?hl=en&user=oKqr-ZQAAAAJ">Wang Zhao</a>, <a href="https://scholar.google.com/citations?hl=en&user=A9D-disAAAAJ">Ziyuan Huang</a>, <a href="https://scholar.google.com/citations?hl=en&user=DmahiOYAAAAJ">Hang Zhao</a> and <a href="https://scholar.google.com/citations?hl=en&user=W_Q33RMAAAAJ">Siheng Chen</a>, and also thank <a href="http://www.cs.cornell.edu/~yanwang/">Yan Wang</a>, <a href="https://shishaoshuai.com/">Shaoshuai Shi</a> and <a href="http://www.cs.cmu.edu/~peiyunh/">Peiyun Wu</a> for their helpful open-source code. The website template is by <a href="https://djl11.github.io/">Daniel Lenton</a>.
+        </div>
+
+    </div>
+
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                BibTeX
+            </h3>
+            <div class="form-group col-md-10 col-md-offset-1">
+                <textarea id="bibtex" class="form-control" readonly>
+@misc{Li2021flat,
+      title={Fooling LiDAR Perception via Adversarial Trajectory Perturbation},
+      author={Yiming Li and Congcong Wen and Felix Juefei-Xu and Chen Feng},
+      year={2021},
+      eprint={2103.15326},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
