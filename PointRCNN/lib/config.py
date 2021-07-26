@@ -244,14 +244,14 @@ def cfg_from_list(cfg_list):
 def save_config_to_file(cfg, pre='cfg', logger=None):
     for key, val in cfg.items():
         if isinstance(cfg[key], edict):
-            # if logger is not None:
-            #     logger.info('\n%s.%s = edict()' % (pre, key))
-            # else:
-            #     print('\n%s.%s = edict()' % (pre, key))
+            if logger is not None:
+                logger.info('\n%s.%s = edict()' % (pre, key))
+            else:
+                print('\n%s.%s = edict()' % (pre, key))
             save_config_to_file(cfg[key], pre=pre + '.' + key, logger=logger)
             continue
 
-        # if logger is not None:
-        #     logger.info('%s.%s: %s' % (pre, key, val))
-        # else:
-        #     print('%s.%s: %s' % (pre, key, val))
+        if logger is not None:
+            logger.info('%s.%s: %s' % (pre, key, val))
+        else:
+            print('%s.%s: %s' % (pre, key, val))

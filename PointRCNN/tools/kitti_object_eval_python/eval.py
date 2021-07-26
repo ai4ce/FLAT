@@ -348,13 +348,10 @@ def calculate_iou_partly(gt_annos, dt_annos, metric, num_parts=50):
     split_parts = get_split_parts(num_examples, num_parts)
     parted_overlaps = []
     example_idx = 0
-    # print('----eval----')
-    # print(num_examples, num_parts)
-    # print(total_dt_num, total_gt_num, split_parts)
+
     for num_part in split_parts:
         gt_annos_part = gt_annos[example_idx:example_idx + num_part]
         dt_annos_part = dt_annos[example_idx:example_idx + num_part]
-        # print(num_part, gt_annos_part, dt_annos_part)
         if metric == 0:
             gt_boxes = np.concatenate([a["bbox"] for a in gt_annos_part], 0)
             dt_boxes = np.concatenate([a["bbox"] for a in dt_annos_part], 0)

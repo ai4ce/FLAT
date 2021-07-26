@@ -1,0 +1,10 @@
+import os
+import sys
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'PointRCNN'))
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'PointRCNN/lib'))
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'PointRCNN/lib/net'))
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'PointRCNN/tools'))

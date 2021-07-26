@@ -87,7 +87,12 @@ def save_kitti_format(sample_id, calib, bbox3d, kitti_output_dir, scores, img_sh
             x, z, ry = bbox3d[k, 0], bbox3d[k, 2], bbox3d[k, 6]
             beta = np.arctan2(z, x)
             alpha = -np.sign(beta) * np.pi / 2 + beta + ry
-            print('%s -1 -1 %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f' %(cfg.CLASSES, alpha, img_boxes[k, 0], img_boxes[k, 1], img_boxes[k, 2], img_boxes[k, 3], bbox3d[k, 3], bbox3d[k, 4], bbox3d[k, 5], bbox3d[k, 0], bbox3d[k, 1], bbox3d[k, 2], bbox3d[k, 6], scores[k]), file=f)
+
+            print('%s -1 -1 %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f %.4f' %
+                  (cfg.CLASSES, alpha, img_boxes[k, 0], img_boxes[k, 1], img_boxes[k, 2], img_boxes[k, 3],
+                   bbox3d[k, 3], bbox3d[k, 4], bbox3d[k, 5], bbox3d[k, 0], bbox3d[k, 1], bbox3d[k, 2],
+                   bbox3d[k, 6], scores[k]), file=f)
+
 
 def save_rpn_features(seg_result, rpn_scores_raw, pts_features, backbone_xyz, backbone_features, kitti_features_dir,
                       sample_id):
