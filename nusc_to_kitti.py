@@ -65,7 +65,8 @@ class KittiConverter:
         self.image_count = image_count
         self.nusc_version = nusc_version
         self.split = split
-
+        self.shuffle = shuffle
+        
         # Create nusc_kitti_dir.
         if not os.path.isdir(self.nusc_kitti_dir):
             os.makedirs(self.nusc_kitti_dir)
