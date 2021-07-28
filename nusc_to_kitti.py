@@ -11,7 +11,7 @@ This script includes function:
 - nuscenes_gt_to_kitti(): Converts nuScenes GT annotations to KITTI format.
 
 To launch these scripts run:
-- python export_kitti.py nuscenes_gt_to_kitti
+- python nusc_to_kitti.py nuscenes_gt_to_kitti
 
 
 See https://www.nuscenes.org/object-detection for more information on the nuScenes result format.
@@ -47,6 +47,7 @@ class KittiConverter:
                  image_count: int = 1000,
                  nusc_version: str = 'v1.0-trainval',
                  dataroot: str = '/data2/yimingli/nuscenes/v1.0-trainval',
+                 shuffle : bool = False,
                  split: str = 'val'):
         """
         :param nusc_kitti_dir: Where to write the KITTI-style annotations.
@@ -55,6 +56,7 @@ class KittiConverter:
         :param image_count: Number of images to convert.
         :param nusc_version: nuScenes version to use.
         :param dataroot: nuScenes dataset path.
+        :param shuffle: Whether to shuffle samples of nuscense.
         :param split: Dataset split to use(train/val/mini_train/mini_val).
         """
         self.nusc_kitti_dir = os.path.expanduser(nusc_kitti_dir)
@@ -151,7 +153,9 @@ class KittiConverter:
         sample_tokens = self._split_to_samples(split_logs)
         sample_tokens = sample_tokens[:self.image_count]
 
-        # random.shuffle(sample_tokens)
+        # shuffle option
+        if self.shuffle:
+            random.shuffle(sample_tokens)
         
         tokens = []
 
