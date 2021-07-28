@@ -1,12 +1,14 @@
 # FLAT: Fooling LiDAR Perception via Adversarial Trajectory Perturbation
 
-Small perturbations to vehicle trajectory can blind LiDAR perception.
+**Small perturbations to vehicle trajectory can blind LiDAR perception.**
 
-<p align="center"><img src='docs/pics/FLAT.png' align="center" height="250px"> </p>
+<p align="center"><img src='docs/pics/FLAT.png' align="center" height="280px"> </p>
 
-<p align="center"> <img src='docs/pics/0558_original.gif' align="center" height="220px"> <img src='docs/pics/0558_distorted.gif' align="center" height="220px"> </p>
-Original Detections vs Detections after attack
-Green/red boxes denote groundtruth/predictions respectively.
+<p align="center"> <img src='docs/pics/0558_original.gif' align="center" height="300px"> <img src='docs/pics/0558_distorted.gif' align="center" height="300px"> </p>
+<p align="center"> Original detections vs Detections after attack.</p>
+<p align="center">Green/red boxes denote groundtruth/predictions respectively.</p>
+
+
 
 > [**Fooling LiDAR Perception via Adversarial Trajectory Perturbation**](https://arxiv.org/abs/2103.15326)        
 > Yiming Li, Congcong Wen, Felix Juefei-Xu, Chen Feng        
@@ -40,9 +42,9 @@ pip install -r requirements.txt
 ```
 
 ## Dataset preparation
-We modified the official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.
-
 Please download the official [nuscenes dataset](https://www.nuscenes.org/nuscenes)(v1.0-trainval)
+
+We modified the official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.
 
 Use ```nusc_to_kitti.py``` to generate the dataset.
 
@@ -63,7 +65,7 @@ FLAT
 │   │   │   ├──velodyne
 ```
 
-*NOTICE*: We defaulty use the first 1000(of 6019 in total) samples from orginal validation split of v1.0-trainval. You can use all of the nuscenes samples, and shuffle option is also provided.
+**NOTICE**: This code use the first 1000(of 6019 in total) samples from orginal validation split of v1.0-trainval at default. You can use all of the nuscenes samples, and shuffle option is also provided.
 
 ## Run FLAT On Evaluation
 We modify the evaluation code of PointRCNN, for implementing FLAT.
