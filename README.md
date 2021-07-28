@@ -1,18 +1,17 @@
-# FLAT: Fooling LiDAR Perception via Adversarial Trajectory Perturbation
+# FLAT:Fooling LiDAR Perception via Adversarial Trajectory Perturbation
 
 **Small perturbations to vehicle trajectory can blind LiDAR perception.**
 
-<p align="center"><img src='docs/pics/FLAT.png' align="center" height="280px"> </p>
+<p align="center"><img src='docs/pics/FLAT.png' align="center" height="300px"> </p>
 
-<p align="center"> <img src='docs/pics/0558_original.gif' align="center" height="300px"> <img src='docs/pics/0558_distorted.gif' align="center" height="300px"> </p>
-<p align="center"> Original detections vs Detections after attack.</p>
-<p align="center">Green/red boxes denote groundtruth/predictions respectively.</p>
-
+Poster Page: https://ai4ce.github.io/FLAT/
 
 
 > [**Fooling LiDAR Perception via Adversarial Trajectory Perturbation**](https://arxiv.org/abs/2103.15326)        
 > Yiming Li, Congcong Wen, Felix Juefei-Xu, Chen Feng        
-> [arXiv 2006.11275](https://arxiv.org/abs/2103.15326)
+> [arXiv 2103.15326](https://arxiv.org/abs/2103.15326)
+
+
 
 ## News
 
@@ -22,8 +21,12 @@
 LiDAR point clouds collected from a moving vehicle are functions of its trajectories, because the sensor motion needs to be compensated to avoid distortions. When autonomous vehicles are sending LiDAR point clouds to deep networks for perception and planning, could the motion compensation consequently become a wide-open backdoor in those networks, due to both the adversarial vulnerability of deep learning and GPS-based vehicle trajectory estimation that is susceptible to wireless spoofing? We demonstrate such possibilities for the first time: instead of directly attacking point cloud coordinates which requires tampering with the raw LiDAR readings, only adversarial spoofing of a self-driving car's trajectory with small perturbations is enough to make safety-critical objects undetectable or detected with incorrect positions. Moreover, polynomial trajectory perturbation is developed to achieve a temporally-smooth and highly-imperceptible attack. Extensive experiments on 3D object detection have shown that such attacks not only lower the performance of the state-of-the-art detectors effectively, but also transfer to other detectors, raising a red flag for the community. 
 
 ## Installation
+For white-box attacks, we use point-based [PointRCNN](https://github.com/sshaoshuai/PointRCNN) as the target detector.  
+```point_rcnn.py``` ```rcnn_net.py``` ```rpn.py``` in ```PointRCNN/lib/net``` were modified for introducing attacks.   
+```kitti_dataset.py``` ```kitti_rcnn_dataset.py```  in ```PointRCNN/lib/datasets``` were modified for loading our customized nusc_kitti dataset.   
+  
+The rest code of PointRCNN is left untouched.
 ### Requirements
-We performed our code on [PointRCNN](https://github.com/sshaoshuai/PointRCNN)
 * Linux (tested on Ubuntu 16.04)
 * Python 3.7+
 * PyTorch 1.2.0
@@ -41,7 +44,7 @@ cd ..
 pip install -r requirements.txt
 ```
 
-## Dataset preparation
+## Dataset Preparation
 Please download the official [nuscenes dataset](https://www.nuscenes.org/nuscenes)(v1.0-trainval)
 
 We modified the official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.
@@ -65,12 +68,14 @@ FLAT
 │   │   │   ├──velodyne
 ```
 
-**NOTICE**: This code use the first 1000(of 6019 in total) samples from orginal validation split of v1.0-trainval at default. You can use all of the nuscenes samples, and shuffle option is also provided.
+**NOTICE**: This script converts the first 1000(of 6019 in total) samples from orginal validation split of v1.0-trainval at default. You can use all of the nuscenes samples, and shuffle option is also provided.
 
-## Run FLAT On Evaluation
-We modify the evaluation code of PointRCNN, for implementing FLAT.
+## Run FLAT on Evaluation
+```flat.py``` is modified from the evaluation code of PointRCNN, for implementing attacks.
 
 For AP calculation, we borrowed the evaluation code from [Train in Germany, Test in The USA: Making 3D Object Detectors Generalize](https://github.com/cxy1997/3D_adapt_auto_driving), utilizing distance-based difficulty metrics.
+
+All the experiments were performed at the [pretrained model of PointRCNN](checkpoint_epoch_70.pth) as we provided.
 
 ```bash
 python flat.py [--stage STAGE] [--nb_iter NB_ITER]
