@@ -4,7 +4,7 @@ Small perturbations to vehicle trajectory can blind LiDAR perception.
 
 <p align="center"><img src='docs/pics/FLAT.png' align="center" height="250px"> </p>
 
-<p align="center"> <img src='docs/pics/0558_original.gif' align="center" height="220px"> </p><p align="right"> <img src='docs/pics/0558_distorted.gif' align="center" height="220px"> </p>
+<p align="center"> <img src='docs/pics/0558_original.gif' align="center" height="220px"> <img src='docs/pics/0558_distorted.gif' align="center" height="220px"> </p>
 Original Detections vs Detections after attack
 Green/red boxes denote groundtruth/predictions respectively.
 
@@ -77,23 +77,29 @@ python flat.py [--stage STAGE] [--nb_iter NB_ITER]
 ```
 
 ```
---split SPLIT         The data split for evaluation
---stage STAGE         Attack stage of Point RCNN. Options: "1" for RPN
+--split SPLIT       
+                    The data split for evaluation
+--stage STAGE       
+                    Attack stage of Point RCNN. Options: "1" for RPN
                     stage, "2" for RCNN stage
---nb_iter NB_ITER     Number of attack iterations in PGD
---task TASK           Task of attacking. Options: "cls" for classification,
+--nb_iter NB_ITER   
+                    Number of attack iterations in PGD
+--task TASK         
+                    Task of attacking. Options: "cls" for classification,
                     "reg" for regression
 --attack_type ATTACK_TYPE
                     Specify attack type. Options: "all", "translation",
                     "rotation"
---iter_eps ITER_EPS   Primary PGD attack step size for each iteration, in
+--iter_eps ITER_EPS 
+                    Primary PGD attack step size for each iteration, in
                     translation only/rotation only attacks, this parameter
                     is used.
 --iter_eps2 ITER_EPS2
                     Secondary PGD attack step size for each iteration,
                     only effective when attack_type is "all" and poly mode
                     is disabled.
---poly                Polynomial trajectory perturbation option. Notice: if
+--poly              
+                    Polynomial trajectory perturbation option. Notice: if
                     true, attack_type will be fixed(translation)
 ```
 
