@@ -1,0 +1,9 @@
+easydict
+tqdm
+tensorboardX
+fire
+numba
+pyyaml
+scikit-image
+shapely
+nuscenes-devkit
