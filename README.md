@@ -2,10 +2,9 @@
 
 Small perturbations to vehicle trajectory can blind LiDAR perception.
 
-<p align="center"> <img src='docs/pics/FLAT.png' align="center" height="200px"> </p>
+<p align="center"><img src='docs/pics/FLAT.png' align="center" height="250px"> </p>
 
-<p align="left"> <img src='docs/pics/0558_original.gif' align="center" height="120px"> </p>
-<p align="right"> <img src='docs/pics/0558_distorted.gif' align="center" height="120px"> </p>
+<p align="center"> <img src='docs/pics/0558_original.gif' align="center" height="220px"> </p><p align="right"> <img src='docs/pics/0558_distorted.gif' align="center" height="220px"> </p>
 Original Detections vs Detections after attack
 Green/red boxes denote groundtruth/predictions respectively.
 
@@ -20,15 +19,15 @@ Green/red boxes denote groundtruth/predictions respectively.
 ## Abstract
 LiDAR point clouds collected from a moving vehicle are functions of its trajectories, because the sensor motion needs to be compensated to avoid distortions. When autonomous vehicles are sending LiDAR point clouds to deep networks for perception and planning, could the motion compensation consequently become a wide-open backdoor in those networks, due to both the adversarial vulnerability of deep learning and GPS-based vehicle trajectory estimation that is susceptible to wireless spoofing? We demonstrate such possibilities for the first time: instead of directly attacking point cloud coordinates which requires tampering with the raw LiDAR readings, only adversarial spoofing of a self-driving car's trajectory with small perturbations is enough to make safety-critical objects undetectable or detected with incorrect positions. Moreover, polynomial trajectory perturbation is developed to achieve a temporally-smooth and highly-imperceptible attack. Extensive experiments on 3D object detection have shown that such attacks not only lower the performance of the state-of-the-art detectors effectively, but also transfer to other detectors, raising a red flag for the community. 
 
-# Installation
-## Requirements
+## Installation
+### Requirements
 We performed our code on [PointRCNN](https://github.com/sshaoshuai/PointRCNN)
 * Linux (tested on Ubuntu 16.04)
 * Python 3.7+
 * PyTorch 1.2.0
 * CUDA 10.0
 
-## Create Anaconda Environment
+### Create Anaconda Environment
 ```bash
 conda create -n flat
 conda activate flat
@@ -40,7 +39,7 @@ cd ..
 pip install -r requirements.txt
 ```
 
-# Dataset preparation
+## Dataset preparation
 We modified the official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.
 
 Please download the official [nuscenes dataset](https://www.nuscenes.org/nuscenes)(v1.0-trainval)
@@ -48,7 +47,7 @@ Please download the official [nuscenes dataset](https://www.nuscenes.org/nuscene
 Use ```nusc_to_kitti.py``` to generate the dataset.
 
 ```bash
-python nusc_to_kitti.py nuscenes_gt_to_kitti --[dataroot "Your nuscenes dataroot"]
+python nusc_to_kitti.py nuscenes_gt_to_kitti [--dataroot "Your nuscenes dataroot"]
 ```
 
 It will generate the dataset in the structure as follows.
@@ -66,7 +65,7 @@ FLAT
 
 *NOTICE*: We defaulty use the first 1000(of 6019 in total) samples from orginal validation split of v1.0-trainval. You can use all of the nuscenes samples, and shuffle option is also provided.
 
-# Run FLAT On Evaluation
+## Run FLAT On Evaluation
 We modify the evaluation code of PointRCNN, for implementing FLAT.
 
 For AP calculation, we borrowed the evaluation code from [Train in Germany, Test in The USA: Making 3D Object Detectors Generalize](https://github.com/cxy1997/3D_adapt_auto_driving), utilizing distance-based difficulty metrics.
@@ -99,7 +98,7 @@ python flat.py [--stage STAGE] [--nb_iter NB_ITER]
 ```
 
 
-# Citation
+## Citation
 ```
 @InProceedings{Li_2021_ICCV,
       title = {Fooling LiDAR Perception via Adversarial Trajectory Perturbation},
