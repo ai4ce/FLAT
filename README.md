@@ -1,4 +1,6 @@
-# FLAT:Fooling LiDAR Perception via Adversarial Trajectory Perturbation
+# FLAT:Fooling LiDAR Perception via Adversarial Trajectory Perturbation[ICCV2021 Oral]
+
+Yiming Li, Congcong Wen, Felix Juefei-Xu, Chen Feng
 
 **Small perturbations to vehicle trajectory can blind LiDAR perception.**
 
@@ -6,10 +8,7 @@
 
 Poster Page: https://ai4ce.github.io/FLAT/
 
-
-> [**Fooling LiDAR Perception via Adversarial Trajectory Perturbation**](https://arxiv.org/abs/2103.15326)        
-> Yiming Li, Congcong Wen, Felix Juefei-Xu, Chen Feng        
-> [arXiv 2103.15326](https://arxiv.org/abs/2103.15326)
+[**ArXiv: Fooling LiDAR Perception via Adversarial Trajectory Perturbation**](https://arxiv.org/abs/2103.15326)        
 
 
 
@@ -61,8 +60,6 @@ cd ..
 ## Dataset Preparation
 Please download the official [nuscenes dataset](https://www.nuscenes.org/nuscenes)(v1.0-trainval)
 
-We modified the official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.
-
 Use ```nusc_to_kitti.py``` to generate the dataset.
 
 ```bash
@@ -85,12 +82,6 @@ FLAT
 **NOTICE**: This script converts the first 1000(of 6019 in total) samples from orginal validation split of v1.0-trainval at default. You can use all of the nuscenes samples, and shuffle option is also provided.
 
 ## Run FLAT on Evaluation
-```flat.py``` is modified from the evaluation code of PointRCNN, for implementing attacks.
-
-For AP calculation, we borrowed the evaluation code from [Train in Germany, Test in The USA: Making 3D Object Detectors Generalize](https://github.com/cxy1997/3D_adapt_auto_driving), utilizing distance-based difficulty metrics.
-
-All the experiments were performed at the [pretrained model of PointRCNN](checkpoint_epoch_70.pth) as we provided.
-
 ```bash
 python flat.py [--stage STAGE] [--nb_iter NB_ITER]
                [--task TASK] [--attack_type ATTACK_TYPE] 
@@ -123,9 +114,25 @@ python flat.py [--stage STAGE] [--nb_iter NB_ITER]
                     Polynomial trajectory perturbation option. Notice: if
                     true, attack_type will be fixed(translation)
 ```
+All the experiments were performed at the [pretrained model](checkpoint_epoch_70.pth) of PointRCNN as provided.
 
+Detection and evaluation results will be save in 
+```bash
+output/{SPLIT}/{ATTACK_TYPE}/FLAT_{STAGE}_{TASK}_{NB_ITER}_{ITER_EPS}_{ITER_EPS2}
+```
+
+## Acknowledgment  
+```flat.py``` is modified from the evaluation code of [PointRCNN](https://github.com/sshaoshuai/PointRCNN), for implementing attacks.  
+```evaluate.py``` is  borrowed from evaluation code from [Train in Germany, Test in The USA: Making 3D Object Detectors Generalize](https://github.com/cxy1997/3D_adapt_auto_driving), utilizing distance-based difficulty metrics.  
+```nusc_to_kitti.py``` is  modified from official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.  
+* [PointRCNN](https://github.com/sshaoshuai/PointRCNN)
+* [3D_adapt_auto_driving](https://github.com/cxy1997/3D_adapt_auto_driving)
+* [nusSenes-devkit](https://github.com/nutonomy/nuscenes-devkit)
+
+This project is not possible without these great codebases.
 
 ## Citation
+If you find FLAT useful in your research, please cite:
 ```
 @InProceedings{Li_2021_ICCV,
       title = {Fooling LiDAR Perception via Adversarial Trajectory Perturbation},
