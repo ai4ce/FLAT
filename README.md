@@ -1,4 +1,4 @@
-# FLAT:Fooling LiDAR Perception via Adversarial Trajectory Perturbation [ICCV2021 Oral]
+# FLAT: Fooling LiDAR Perception via Adversarial Trajectory Perturbation [ICCV2021 Oral]
 
 [Yiming Li](https://scholar.google.com/citations?user=i_aajNoAAAAJ), [Congcong Wen](https://scholar.google.com/citations?user=OTBgvCYAAAAJ), [Felix Juefei-Xu](https://scholar.google.com/citations?user=dgN8vtwAAAAJ), [Chen Feng](https://scholar.google.com/citations?user=YeG8ZM0AAAAJ)
 
@@ -14,7 +14,7 @@ Poster Page: https://ai4ce.github.io/FLAT/
 
 ## News
 
-[2021-07] FLAT is accepted at ICCV 2021 as oral presentation
+[2021-07]  🔥 FLAT is accepted at ICCV 2021 as oral presentation (210/6236, 3% acceptance rate)
 
 ## Abstract
 LiDAR point clouds collected from a moving vehicle are functions of its trajectories, because the sensor motion needs to be compensated to avoid distortions. When autonomous vehicles are sending LiDAR point clouds to deep networks for perception and planning, could the motion compensation consequently become a wide-open backdoor in those networks, due to both the adversarial vulnerability of deep learning and GPS-based vehicle trajectory estimation that is susceptible to wireless spoofing? We demonstrate such possibilities for the first time: instead of directly attacking point cloud coordinates which requires tampering with the raw LiDAR readings, only adversarial spoofing of a self-driving car's trajectory with small perturbations is enough to make safety-critical objects undetectable or detected with incorrect positions. Moreover, polynomial trajectory perturbation is developed to achieve a temporally-smooth and highly-imperceptible attack. Extensive experiments on 3D object detection have shown that such attacks not only lower the performance of the state-of-the-art detectors effectively, but also transfer to other detectors, raising a red flag for the community. 
