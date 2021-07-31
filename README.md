@@ -1,6 +1,6 @@
 # FLAT: Fooling LiDAR Perception via Adversarial Trajectory Perturbation [ICCV2021 Oral]
 
-[Yiming Li](https://scholar.google.com/citations?user=i_aajNoAAAAJ), [Congcong Wen](https://scholar.google.com/citations?user=OTBgvCYAAAAJ), [Felix Juefei-Xu](https://scholar.google.com/citations?user=dgN8vtwAAAAJ), [Chen Feng](https://scholar.google.com/citations?user=YeG8ZM0AAAAJ)
+[Yiming Li*](https://scholar.google.com/citations?user=i_aajNoAAAAJ), [Congcong Wen*](https://scholar.google.com/citations?user=OTBgvCYAAAAJ), [Felix Juefei-Xu](https://scholar.google.com/citations?user=dgN8vtwAAAAJ), [Chen Feng](https://scholar.google.com/citations?user=YeG8ZM0AAAAJ)
 
 **Small perturbations to vehicle trajectory can blind LiDAR perception.**
 
