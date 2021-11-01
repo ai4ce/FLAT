@@ -4,7 +4,7 @@
 
 **Small perturbations to vehicle trajectory can blind LiDAR perception.**
 
-<p align="center"><img src='docs/pics/FLAT.png' align="center" height="400px"> </p>
+<p align="center"><img src='docs/pics/FLAT.png' align="center" height="500px"> </p>
 
 Poster Page: https://ai4ce.github.io/FLAT/
 
