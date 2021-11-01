@@ -127,7 +127,7 @@ output/{SPLIT}/{ATTACK_TYPE}/FLAT_{STAGE}_{TASK}_{NB_ITER}_{ITER_EPS}_{ITER_EPS2
 ```nusc_to_kitti.py``` is  modified from official [nuscenes-devkit script](https://github.com/nutonomy/nuscenes-devkit/blob/master/python-sdk/nuscenes/scripts/export_kitti.py) to generate kitti-format nuscenes dataset with ego pose for interpolation.  
 * [PointRCNN](https://github.com/sshaoshuai/PointRCNN)
 * [3D_adapt_auto_driving](https://github.com/cxy1997/3D_adapt_auto_driving)
-* [nusSenes-devkit](https://github.com/nutonomy/nuscenes-devkit)
+* [nuSenes-devkit](https://github.com/nutonomy/nuscenes-devkit)
 
 This project is not possible without these great codebases.
 
